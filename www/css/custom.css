@@ -1,0 +1,133 @@
+ /* Reset margins and padding */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Override Shiny's default container padding */
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Remove default Bootstrap container padding */
+.container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+  /*display: flex;
+  flex-direction: column;
+  min-height: 100vh;*/
+  flex: 1;
+  width: 100% !important;
+  max-width: none !important;
+  background-color: white;
+}
+
+/* Ensure main content area takes full width */
+#app, .shiny-html-output {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  color: #333;
+  background-color: #DBDBDB;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  height: 70px;
+}
+
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 15px;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+.hamburger-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+
+.logo-left {
+  margin-right: 20px;
+}
+
+.title-navbar {
+  flex: 1;
+  text-align: center;
+}
+
+.sidebar {
+  position: fixed;
+  top: 70px;
+  left: -300px;
+  width: 300px;
+  height: calc(100vh - 70px);
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  z-index: 999;
+  padding: 20px;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.main-content {
+  margin-top: 70px;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.sidebar-active {
+  margin-left: 300px;
+}
+
+.footer {
+  margin-top: 50px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .main-content.sidebar-active {
+    margin-left: 0;
+  }
+}
