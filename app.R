@@ -57,8 +57,11 @@ ui <- tagList(
     ),
     
     
-    # Page content container
-        mainUi("main"),
+  # Page content container
+  mainUi("main"),
+
+  ),
+  
   # Footer
   tags$footer(
     class = "footer",
@@ -67,7 +70,8 @@ ui <- tagList(
       tags$h2("footer text")
     )
   )
-  )
+  
+  
 )
 
 

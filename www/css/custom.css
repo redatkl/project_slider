@@ -37,7 +37,8 @@ body {
 
 
 .navbar {
-  position: fixed;
+  display: flex;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -90,7 +91,11 @@ body {
 
 .title-navbar {
   flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
+  pointer-events: none; /* This allows clicks to pass through the title */
 }
 
 .sidebar {
@@ -115,14 +120,28 @@ body {
   margin-top: 70px;
   padding: 20px;
   transition: margin-left 0.3s ease;
+  /*flex: 1;*/
 }
 
 .main-content.sidebar-active {
   margin-left: 300px;
 }
 
+/* Footer styling */
 .footer {
-  margin-top: 50px;
+  background-color: #f8f9fa;
+  padding: 0;
+  text-align: center;
+  margin-top: auto; /* This pushes footer to bottom */
+  width: 100%;
+}
+
+.footer-content {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 10px 20px;
 }
 
 /* Mobile responsive */

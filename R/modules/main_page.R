@@ -10,7 +10,9 @@ mainUi <- function(id) {
         class = "main-content",
         tags$h1("Welcome to the Map Slider Application"),
         tags$p("This application allows you to explore various geographical data through an interactive map slider interface. Use the navigation bar above to access different features and datasets.")
-      )
+      ),
+      
+      mapUi("map")
       
     )
 }
