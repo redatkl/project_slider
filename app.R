@@ -58,7 +58,8 @@ ui <- tagList(
     
     
   # Page content container
-  mainUi("main"),
+  #mainUi("main"),
+  mapUi("map")
 
   ),
   
@@ -79,7 +80,8 @@ ui <- tagList(
 server <- function(input, output, session) {
   
   # Call module servers
-  mainServer("main")
+  #mainServer("main")
+  mapServer("map")
 
 }
 

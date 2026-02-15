@@ -10,20 +10,20 @@ mapUi <- function(id) {
       tags$script(src = "js/map_slider.js")
     ),
     tags$div(
-      id = "map_container",
+      id = "map-container",
       class = "map-container",
       
       # Bottom map (full width)
       tags$div(
         class = "map-wrapper",
-        leafletOutput("map1", height = "600px")
+        leafletOutput(ns("map1"), height = "100%")
         ),
       
       # Top map (clipped, full width)
       tags$div(
         class = "map-wrapper", 
         id = "map2-wrapper", 
-        leafletOutput("map2", height = "600px")
+        leafletOutput(ns("map2"), height = "100%")
         ),
       
       tags$div(class = "slider-divider",
@@ -43,7 +43,7 @@ mapServer <- function(id) {
     
     # Render the first map (OpenStreetMap)
     output$map1 <- renderLeaflet({
-      leaflet() %>%
+      leaflet(options = leafletOptions(attributionControl = FALSE)) %>%
         addTiles(group = "OSM") %>%
         setView(lng = -74.0060, lat = 40.7128, zoom = 12) %>%
         addMarkers(lng = -74.0060, lat = 40.7128, popup = "New York - Street Map")
@@ -51,7 +51,7 @@ mapServer <- function(id) {
     
     # Render the second map (Satellite imagery)
     output$map2 <- renderLeaflet({
-      leaflet() %>%
+      leaflet(options = leafletOptions(attributionControl = FALSE)) %>%
         addProviderTiles(providers$Esri.WorldImagery, group = "Satellite") %>%
         setView(lng = -74.0060, lat = 40.7128, zoom = 12) %>%
         addMarkers(lng = -74.0060, lat = 40.7128, popup = "New York - Satellite View")
