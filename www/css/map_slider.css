@@ -1,0 +1,46 @@
+.map-slider-container {
+  position: relative;
+  height: 600px;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.map-left-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 600px;
+  width: 50%;
+  overflow: hidden;
+}
+
+.map-right-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 600px;
+  width: 50%;
+  overflow: hidden;
+}
+
+.map-slider-divider {
+  position: absolute;
+  top: 0;
+  height: 600px;
+  left: 50%;
+  width: 4px;
+  background: white;
+  cursor: ew-resize;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Force leaflet containers to full size */
+.map-left-container .leaflet,
+.map-right-container .leaflet,
+.map-left-container .html-widget,
+.map-right-container .html-widget {
+  height: 600px !important;
+  width: 100% !important;
+}
