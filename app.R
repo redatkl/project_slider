@@ -37,7 +37,7 @@ ui <- tagList(
       #center navigation buttons
       tags$div(
         class = "title-navbar",
-        tags$h2("Map Slider")
+        tags$h2("MapCompare")
       )
     ),
     
@@ -45,15 +45,18 @@ ui <- tagList(
     tags$div(
       id = "sidebar",
       class = "sidebar",
-      tags$h3("Sidebar Menu"),
+      tags$h3("Map Configuration"),
       tags$hr(),
-      tags$p("Add your sidebar content here:"),
-      tags$ul(
-        tags$li("Menu Item 1"),
-        tags$li("Menu Item 2"),
-        tags$li("Menu Item 3")
+      
+      tags$div(
+        tags$h4("Map 1 (Left)"),
+        fileInput("tif1", "Choose TIF file", accept = c(".tif", ".tiff"))
+      ),
+      
+      tags$div(
+        tags$h4("Map 2 (Right)"),
+        fileInput("tif2", "Choose TIF file", accept = c(".tif", ".tiff"))
       )
-      # You can add more sidebar content, inputs, filters, etc.
     ),
     
     
@@ -81,7 +84,9 @@ server <- function(input, output, session) {
   
   # Call module servers
   #mainServer("main")
-  mapServer("map")
+  mapServer("map", 
+            tif1_path = reactive(input$tif1),
+            tif2_path = reactive(input$tif2))
 
 }
 

@@ -35,26 +35,64 @@ mapUi <- function(id) {
 }
 
 # map module server
-mapServer <- function(id) {
+mapServer <- function(id, tif1_path, tif2_path) {
   moduleServer(id, function(input, output, session) {
     
     # Reactive value to store the slider position
     slider_position <- reactiveVal(50)
     
-    # Render the first map (OpenStreetMap)
+    # Render map 1
     output$map1 <- renderLeaflet({
       leaflet(options = leafletOptions(attributionControl = FALSE)) %>%
-        addTiles(group = "OSM") %>%
-        setView(lng = -74.0060, lat = 40.7128, zoom = 12) %>%
-        addMarkers(lng = -74.0060, lat = 40.7128, popup = "New York - Street Map")
+        addTiles(group = "OSM")%>%
+        setView(lng = 0, lat = 0, zoom = 2)
     })
     
-    # Render the second map (Satellite imagery)
+    # Render map 2
     output$map2 <- renderLeaflet({
       leaflet(options = leafletOptions(attributionControl = FALSE)) %>%
-        addProviderTiles(providers$Esri.WorldImagery, group = "Satellite") %>%
-        setView(lng = -74.0060, lat = 40.7128, zoom = 12) %>%
-        addMarkers(lng = -74.0060, lat = 40.7128, popup = "New York - Satellite View")
+        addProviderTiles(providers$Esri.WorldImagery, group = "Satellite") %>% 
+        setView(lng = 0, lat = 0, zoom = 2)
+    })
+    
+    # Update map1 with TIF
+    observeEvent(tif1_path(), {
+      req(tif1_path())
+      
+      tryCatch({
+        r <- raster(tif1_path()$datapath)
+        pal <- colorNumeric("RdYlBu", values(r), na.color = "transparent")
+        
+        leafletProxy("map1") %>%
+          clearImages() %>%
+          addRasterImage(r, colors = pal, opacity = 0.8) %>%
+          fitBounds(
+            lng1 = extent(r)@xmin, lat1 = extent(r)@ymin,
+            lng2 = extent(r)@xmax, lat2 = extent(r)@ymax
+          )
+      }, error = function(e) {
+        showNotification(paste("Error loading TIF 1:", e$message), type = "error")
+      })
+    })
+    
+    # Update map2 with TIF
+    observeEvent(tif2_path(), {
+      req(tif2_path())
+      
+      tryCatch({
+        r <- raster(tif2_path()$datapath)
+        pal <- colorNumeric("RdYlBu", values(r), na.color = "transparent")
+        
+        leafletProxy("map2") %>%
+          clearImages() %>%
+          addRasterImage(r, colors = pal, opacity = 0.8) %>%
+          fitBounds(
+            lng1 = extent(r)@xmin, lat1 = extent(r)@ymin,
+            lng2 = extent(r)@xmax, lat2 = extent(r)@ymax
+          )
+      }, error = function(e) {
+        showNotification(paste("Error loading TIF 2:", e$message), type = "error")
+      })
     })
     
     # Sync map movements from map1 to map2
