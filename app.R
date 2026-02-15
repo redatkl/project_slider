@@ -31,7 +31,7 @@ ui <- tagList(
       # add first logo 
       tags$div(
         class= "logo-left",
-        tags$a(href = "", target = "_blank", tags$img(src = "logos/logo.png", height = "50px"))
+        tags$img(src = "logos/logo_name.png", height = "50px")
       ),
       
       #center navigation buttons
@@ -49,12 +49,12 @@ ui <- tagList(
       tags$hr(),
       
       tags$div(
-        tags$h4("Map 1 (Left)"),
+        tags$h4("Map 1 (Right)"),
         fileInput("tif1", "Choose TIF file", accept = c(".tif", ".tiff"))
       ),
       
       tags$div(
-        tags$h4("Map 2 (Right)"),
+        tags$h4("Map 2 (Left)"),
         fileInput("tif2", "Choose TIF file", accept = c(".tif", ".tiff"))
       )
     ),

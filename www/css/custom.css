@@ -95,8 +95,20 @@ body {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  pointer-events: none; /* This allows clicks to pass through the title */
+  background: #1e6f43;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border-bottom: 3px solid #f15a24;
 }
+
+.title-navbar h2 {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: White;
+}
+
 
 .sidebar {
   position: fixed;
@@ -108,7 +120,7 @@ body {
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   transition: left 0.3s ease;
   overflow-y: auto;
-  z-index: 999;
+  z-index: 3000;
   padding: 20px;
 }
 
